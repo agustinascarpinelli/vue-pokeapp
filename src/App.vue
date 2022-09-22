@@ -12,7 +12,8 @@ Pokemon App
     </router-link>
 <div>
         <router-link class="btn btn-outline-primary me-2" to="/"  active-class="active">Home</router-link >
-        <router-link class="btn btn-outline-primary"  to="/pokemons"  active-class="active">Pokemons</router-link >
+        <router-link class="btn btn-outline-primary me-2"  to="/pokemons"  active-class="active">Pokemons</router-link >
+          <router-link class="btn btn-outline-primary"  to="/favorites"  active-class="active">Favorites</router-link >
       </div>
       </div>
       </nav>

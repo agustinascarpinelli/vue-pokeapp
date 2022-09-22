@@ -1,22 +1,19 @@
 <script setup>
-import axios from 'axios';
-import {ref} from 'vue'
 import { useRoute,useRouter } from 'vue-router';
 import { useGetData } from '../composables/getData';
+import { useFavoriteStore } from '../store/favorites';
 const {error,loading,data,getData}=useGetData()
 const route=useRoute()
 const router=useRouter()
-const pokeSprite=ref({})
-
+const useFavorite=useFavoriteStore()
+const {add,findPokemon}=useFavorite
 const back=()=>{
     router.push("/pokemons")
 }
 getData(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`)
 
 
-
 </script>
-
 
 <template >
 
@@ -25,11 +22,13 @@ getData(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`)
         <div  v-if="data">
 <h1 >Pokemon name: {{$route.params.name}}</h1>
 <img :src="data.sprites?.front_default" alt="pokemon"/>
+<br/>
+<button class="btn btn-outline-primary mb-2" @click="add(data)" :disabled="findPokemon(data.species.name)">Add to favorites</button>
 </div>
 <div v-if="error"><h1> There´s no pokemon with the name : {{$route.params.name}}</h1></div>
 <br/>
 
-<button @click="back()" class="btn btn-primary">Get back</button>
+<button @click="back()" class="btn btn-primary" >Get back</button>
 </div>
 </template>
 
